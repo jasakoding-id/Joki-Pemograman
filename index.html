@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joki Pemrograman – Jasa Pembuatan Program, Website & Aplikasi</title>
+<meta name="description" content="Jasa pemrograman untuk website, aplikasi, bot, dan perbaikan bug. Pengerjaan rapi, bisa direvisi, dan tepat waktu.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef2f7;
+    --surface: #ffffff;
+    --ink: #14213d;
+    --muted: #55607a;
+    --line: #cfd8e6;
+    --blue: #2f5bff;
+    --blue-dark: #1b3fcf;
+    --yellow: #ffd23f;
+    --green: #1f9d6b;
+    --code-bg: #14213d;
+    --code-ink: #e6ecfa;
+    --radius: 14px;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --body: "Instrument Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800; }
+  h3 { font-size: 1.25rem; font-weight: 700; }
+  p { margin: 0; }
+
+  /* Header */
+  header.site { padding: 1.1rem 0; }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 1.25rem; text-decoration: none; letter-spacing: -0.02em; }
+  .logo span { background: var(--yellow); padding: 0 .35em; border-radius: 6px; }
+  nav.main { display: flex; gap: 1.4rem; align-items: center; }
+  nav.main a { text-decoration: none; font-weight: 500; color: var(--muted); }
+  nav.main a:hover { color: var(--ink); }
+  @media (max-width: 720px) { nav.main a:not(.btn) { display: none; } }
+
+  .btn {
+    display: inline-block; font: 600 1rem var(--body);
+    padding: .8rem 1.35rem; border-radius: 10px; text-decoration: none; cursor: pointer;
+    border: 2px solid var(--ink); background: var(--blue); color: #fff; border-color: var(--blue);
+    transition: background .15s, transform .15s;
+  }
+  .btn:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+  .btn:active { transform: translateY(1px); }
+  .btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: #fff; }
+
+  /* Hero */
+  .hero { padding: 3.5rem 0 5rem; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
+  @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } }
+  .hero h1 { font-size: clamp(2.6rem, 6.5vw, 4.6rem); font-weight: 800; }
+  .hero h1 mark { background: none; color: inherit; box-shadow: inset 0 -0.32em 0 var(--yellow); }
+  .hero p.lead { margin-top: 1.4rem; max-width: 34rem; color: var(--muted); font-size: 1.2rem; }
+  .hero .cta { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .8rem; }
+  .hero .assure { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; color: var(--muted); font-size: .98rem; }
+  .hero .assure span::before { content: "✓"; color: var(--green); font-weight: 700; margin-right: .45rem; }
+
+  /* Editor mock: the one memorable element */
+  .editor {
+    background: var(--code-bg); color: var(--code-ink); border-radius: 16px;
+    box-shadow: 10px 10px 0 var(--blue); overflow: hidden; font-family: var(--mono); font-size: .88rem;
+  }
+  .editor .bar { display: flex; align-items: center; gap: .5rem; padding: .7rem 1rem; background: #0e1830; }
+  .editor .bar i { width: 11px; height: 11px; border-radius: 50%; background: #3b4a6e; display: block; }
+  .editor .bar b { margin-left: .6rem; font-weight: 400; color: #8e9bbd; font-size: .8rem; }
+  .editor pre { margin: 0; padding: 1.1rem 1.2rem; overflow-x: auto; line-height: 1.7; }
+  .tok-k { color: #8fb0ff; } .tok-s { color: #ffd23f; } .tok-c { color: #6f7ea3; } .tok-f { color: #7fe3b4; }
+  .tests { border-top: 1px solid #263559; padding: 1rem 1.2rem 1.2rem; }
+  .tests div { opacity: 0; animation: show .01s forwards; }
+  .tests div:nth-child(1) { animation-delay: .6s; }
+  .tests div:nth-child(2) { animation-delay: 1.1s; }
+  .tests div:nth-child(3) { animation-delay: 1.6s; }
+  .tests div:nth-child(4) { animation-delay: 2.2s; }
+  .tests .ok { color: #7fe3b4; }
+  .tests .sum { margin-top: .5rem; color: var(--yellow); }
+  @keyframes show { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .tests div { animation: none; opacity: 1; } html { scroll-behavior: auto; } }
+
+  /* Sections */
+  section { padding: 4.5rem 0; }
+  section.alt { background: var(--surface); border-block: 1px solid var(--line); }
+  .head { max-width: 40rem; margin-bottom: 2.6rem; }
+  .head p { margin-top: .8rem; color: var(--muted); }
+
+  /* Layanan */
+  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem; }
+  .service { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; }
+  .service h3 { margin-bottom: .5rem; }
+  .service p { color: var(--muted); font-size: 1rem; }
+  .service .tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .service .tags span { font: 500 .8rem var(--mono); background: var(--bg); padding: .2rem .55rem; border-radius: 6px; }
+
+  /* Alur: this is a real sequence */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.6rem; counter-reset: step; }
+  .steps li { counter-increment: step; border-top: 3px solid var(--ink); padding-top: 1rem; }
+  .steps li::before { content: counter(step); display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--yellow); font: 700 1rem var(--display); margin-bottom: .7rem; }
+  .steps h3 { font-size: 1.1rem; margin-bottom: .3rem; }
+  .steps p { color: var(--muted); font-size: .98rem; }
+
+  /* Harga */
+  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; align-items: stretch; }
+  .plan { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.8rem; display: flex; flex-direction: column; }
+  .plan.pick { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .plan .price { font: 800 2rem var(--display); margin: .6rem 0 1rem; letter-spacing: -0.02em; }
+  .plan .price small { font: 500 .95rem var(--body); opacity: .7; }
+  .plan ul { margin: 0 0 1.6rem; padding: 0; list-style: none; display: grid; gap: .5rem; flex: 1; }
+  .plan li::before { content: "✓"; color: var(--green); font-weight: 700; margin-right: .55rem; }
+  .plan.pick li::before { color: var(--yellow); }
+  .plan .btn { text-align: center; }
+  .plan.pick .btn { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+  .note { margin-top: 1.2rem; color: var(--muted); font-size: .95rem; }
+
+  /* FAQ */
+  .faq { max-width: 46rem; display: grid; gap: .7rem; }
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.3rem; }
+  summary { cursor: pointer; font-weight: 600; list-style-position: outside; }
+  details[open] summary { margin-bottom: .6rem; }
+  details p { color: var(--muted); }
+
+  /* Kontak */
+  .contact { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 820px) { .contact { grid-template-columns: 1fr; } }
+  form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; display: grid; gap: 1rem; }
+  label { display: grid; gap: .35rem; font-weight: 600; font-size: .95rem; }
+  input, select, textarea {
+    font: 400 1rem var(--body); color: var(--ink); background: var(--bg);
+    border: 1.5px solid var(--line); border-radius: 10px; padding: .7rem .85rem; width: 100%;
+  }
+  textarea { min-height: 120px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(47,91,255,.2); }
+  form .btn { justify-self: start; }
+  .hint { font-size: .88rem; color: var(--muted); font-weight: 400; }
+
+  footer { padding: 2.2rem 0 3rem; color: var(--muted); font-size: .95rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#top"><span>Joki</span> Pemrograman</a>
+    <nav class="main" aria-label="Navigasi utama">
+      <a href="#layanan">Layanan</a>
+      <a href="#alur">Alur kerja</a>
+      <a href="#harga">Harga</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn" href="#kontak">Pesan sekarang</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="judul">
+    <div class="wrap">
+      <div>
+        <h1 id="judul">Kodenya jalan, <mark>deadline aman.</mark></h1>
+        <p class="lead">Jasa pembuatan program, website, dan aplikasi, serta perbaikan bug. Kamu ceritakan kebutuhannya, kami kerjakan sampai semua tes lolos.</p>
+        <div class="cta">
+          <a class="btn" href="#kontak">Konsultasi gratis</a>
+          <a class="btn ghost" href="#harga">Lihat harga</a>
+        </div>
+        <div class="assure">
+          <span>Revisi gratis</span>
+          <span>Kode rapi dan berkomentar</span>
+          <span>Respon cepat</span>
+        </div>
+      </div>
+
+      <div class="editor" role="img" aria-label="Contoh kode Python dan hasil tes yang lolos">
+        <div class="bar"><i></i><i></i><i></i><b>hitung_diskon.py</b></div>
+<pre><span class="tok-k">def</span> <span class="tok-f">hitung_diskon</span>(total, member):
+    <span class="tok-c"># member dapat 10%, belanja &gt; 500rb dapat 5%</span>
+    diskon = <span class="tok-s">0</span>
+    <span class="tok-k">if</span> member:
+        diskon += <span class="tok-s">0.10</span>
+    <span class="tok-k">if</span> total &gt; <span class="tok-s">500_000</span>:
+        diskon += <span class="tok-s">0.05</span>
+    <span class="tok-k">return</span> total * (<span class="tok-s">1</span> - diskon)</pre>
+        <div class="tests" aria-hidden="true">
+          <div class="ok">✓ test_tanpa_diskon</div>
+          <div class="ok">✓ test_member</div>
+          <div class="ok">✓ test_belanja_besar</div>
+          <div class="sum">3 passed in 0.02s</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="layanan" class="alt" aria-labelledby="h-layanan">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-layanan">Yang bisa kami kerjakan</h2>
+        <p>Dari tugas kecil sampai proyek lengkap. Kalau kebutuhanmu tidak ada di daftar, tetap tanyakan saja.</p>
+      </div>
+      <div class="services">
+        <article class="service">
+          <h3>Website</h3>
+          <p>Landing page, company profile, toko online, dan dashboard admin yang tampil baik di HP maupun laptop.</p>
+          <div class="tags"><span>HTML/CSS/JS</span><span>React</span><span>Laravel</span><span>PHP</span></div>
+        </article>
+        <article class="service">
+          <h3>Aplikasi mobile dan desktop</h3>
+          <p>Aplikasi Android, Flutter, dan program desktop dengan antarmuka yang jelas dan mudah dipakai.</p>
+          <div class="tags"><span>Flutter</span><span>Kotlin</span><span>Java</span><span>C#</span></div>
+        </article>
+        <article class="service">
+          <h3>Program dan algoritma</h3>
+          <p>Program konsol, struktur data, otomasi, dan skrip pengolah data lengkap dengan dokumentasi singkat.</p>
+          <div class="tags"><span>Python</span><span>C/C++</span><span>Java</span><span>SQL</span></div>
+        </article>
+        <article class="service">
+          <h3>Database dan API</h3>
+          <p>Perancangan tabel, query, REST API, dan koneksi antara aplikasi dengan database.</p>
+          <div class="tags"><span>MySQL</span><span>PostgreSQL</span><span>Node.js</span><span>Firebase</span></div>
+        </article>
+        <article class="service">
+          <h3>Perbaikan bug</h3>
+          <p>Kode error atau hasilnya tidak sesuai? Kami cari penyebabnya, perbaiki, dan jelaskan apa yang salah.</p>
+          <div class="tags"><span>Debugging</span><span>Refactor</span><span>Code review</span></div>
+        </article>
+        <article class="service">
+          <h3>Bot dan otomasi</h3>
+          <p>Bot Telegram atau WhatsApp, web scraping, dan skrip yang mengerjakan tugas berulang secara otomatis.</p>
+          <div class="tags"><span>Telegram Bot</span><span>Selenium</span><span>Cron</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="alur" aria-labelledby="h-alur">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-alur">Cara pesan</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Ceritakan kebutuhan</h3><p>Isi formulir di bawah atau chat langsung. Sertakan bahasa pemrograman, fitur, dan deadline.</p></li>
+        <li><h3>Terima penawaran</h3><p>Kamu mendapat estimasi harga dan waktu pengerjaan sebelum bayar apa pun.</p></li>
+        <li><h3>Bayar DP dan mulai</h3><p>Pengerjaan dimulai setelah DP. Kamu menerima kabar perkembangan secara berkala.</p></li>
+        <li><h3>Cek dan revisi</h3><p>Hasil dikirim beserta panduan menjalankannya. Revisi sesuai kesepakatan tanpa biaya tambahan.</p></li>
+        <li><h3>Pelunasan</h3><p>Setelah kamu puas, lunasi sisanya dan file lengkap diserahkan.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="harga" class="alt" aria-labelledby="h-harga">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-harga">Harga mulai dari</h2>
+        <p>Harga akhir menyesuaikan tingkat kesulitan dan deadline. Konsultasi dan estimasi tidak dipungut biaya.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <h3>Tugas kecil</h3>
+          <div class="price">Rp 50rb <small>mulai dari</small></div>
+          <ul>
+            <li>Program sederhana atau perbaikan bug</li>
+            <li>Selesai 1 sampai 2 hari</li>
+            <li>1x revisi</li>
+          </ul>
+          <a class="btn ghost" href="#kontak">Pilih paket ini</a>
+        </article>
+        <article class="plan pick">
+          <h3>Proyek menengah</h3>
+          <div class="price">Rp 250rb <small>mulai dari</small></div>
+          <ul>
+            <li>Website atau aplikasi dengan database</li>
+            <li>Selesai 3 sampai 7 hari</li>
+            <li>3x revisi</li>
+            <li>Dokumentasi dan panduan instalasi</li>
+          </ul>
+          <a class="btn" href="#kontak">Pilih paket ini</a>
+        </article>
+        <article class="plan">
+          <h3>Proyek besar</h3>
+          <div class="price">Hubungi kami</div>
+          <ul>
+            <li>Sistem lengkap dengan banyak fitur</li>
+            <li>Jadwal disepakati bersama</li>
+            <li>Revisi sesuai kesepakatan</li>
+            <li>Pendampingan setelah serah terima</li>
+          </ul>
+          <a class="btn ghost" href="#kontak">Minta penawaran</a>
+        </article>
+      </div>
+      <p class="note">Harga di atas hanya contoh. Ubah sesuai tarifmu di file <code>index.html</code>.</p>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="h-faq">
+    <div class="wrap">
+      <div class="head"><h2 id="h-faq">Pertanyaan yang sering ditanyakan</h2></div>
+      <div class="faq">
+        <details>
+          <summary>Apakah data dan kode saya aman?</summary>
+          <p>Ya. Semua materi yang kamu kirim hanya dipakai untuk pengerjaan pesananmu dan tidak dibagikan ke pihak lain.</p>
+        </details>
+        <details>
+          <summary>Berapa lama pengerjaannya?</summary>
+          <p>Tugas kecil biasanya 1 sampai 2 hari. Proyek menengah 3 sampai 7 hari. Kalau butuh lebih cepat, sebutkan deadline-mu dan kami beri tahu apakah memungkinkan.</p>
+        </details>
+        <details>
+          <summary>Bagaimana kalau hasilnya tidak sesuai?</summary>
+          <p>Kamu bisa minta revisi sesuai jumlah yang disepakati. Jika kebutuhan berubah di tengah jalan, kami diskusikan dulu penyesuaiannya.</p>
+        </details>
+        <details>
+          <summary>Bisa dijelaskan cara kerja kodenya?</summary>
+          <p>Bisa. Setiap hasil disertai komentar di kode dan penjelasan singkat, supaya kamu paham dan bisa mengembangkannya sendiri.</p>
+        </details>
+        <details>
+          <summary>Metode pembayarannya apa saja?</summary>
+          <p>Transfer bank dan e-wallet. Pembayaran dibagi dua tahap: DP di awal, pelunasan setelah hasil kamu setujui.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak" class="alt" aria-labelledby="h-kontak">
+    <div class="wrap contact">
+      <div>
+        <h2 id="h-kontak">Mulai dari satu pesan</h2>
+        <p style="margin-top:.9rem;color:var(--muted);max-width:30rem">Isi formulir dan kamu akan diarahkan ke WhatsApp dengan pesan yang sudah tertulis. Tinggal kirim.</p>
+      </div>
+
+      <form id="order" novalidate>
+        <label>Nama
+          <input type="text" id="nama" autocomplete="name" required placeholder="Nama kamu">
+        </label>
+        <label>Jenis pekerjaan
+          <select id="jenis">
+            <option>Website</option>
+            <option>Aplikasi mobile atau desktop</option>
+            <option>Program dan algoritma</option>
+            <option>Database dan API</option>
+            <option>Perbaikan bug</option>
+            <option>Bot dan otomasi</option>
+            <option>Lainnya</option>
+          </select>
+        </label>
+        <label>Bahasa atau teknologi
+          <input type="text" id="tech" placeholder="Contoh: Python, Laravel, Flutter">
+        </label>
+        <label>Deadline
+          <input type="date" id="deadline">
+        </label>
+        <label>Detail kebutuhan
+          <textarea id="detail" required placeholder="Jelaskan fitur yang dibutuhkan atau masalah yang ingin diperbaiki."></textarea>
+          <span class="hint">Makin jelas ceritamu, makin akurat estimasinya.</span>
+        </label>
+        <button class="btn" type="submit">Kirim lewat WhatsApp</button>
+        <p id="error" role="alert" style="color:#b3261e;font-size:.95rem" hidden>Isi nama dan detail kebutuhan dulu.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Joki Pemrograman</span>
+    <span>Balasan biasanya dalam beberapa jam.</span>
+  </div>
+</footer>
+
+<script>
+  // ===== GANTI DATA INI =====
+  const NOMOR_WA = "6282267118946"; // format internasional tanpa + dan 0 di depan
+  // ==========================
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.getElementById("order").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const nama = document.getElementById("nama").value.trim();
+    const detail = document.getElementById("detail").value.trim();
+    const error = document.getElementById("error");
+    if (!nama || !detail) { error.hidden = false; return; }
+    error.hidden = true;
+
+    const jenis = document.getElementById("jenis").value;
+    const tech = document.getElementById("tech").value.trim() || "-";
+    const deadline = document.getElementById("deadline").value || "-";
+
+    const pesan =
+      "Halo, saya " + nama + ".\n" +
+      "Jenis pekerjaan: " + jenis + "\n" +
+      "Teknologi: " + tech + "\n" +
+      "Deadline: " + deadline + "\n" +
+      "Detail: " + detail;
+
+    window.open("https://wa.me/" + NOMOR_WA + "?text=" + encodeURIComponent(pesan), "_blank", "noopener");
+  });
+</script>
+</body>
+</html>
